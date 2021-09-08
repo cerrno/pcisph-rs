@@ -1,7 +1,7 @@
 # pcisph-rs
 2D Predictive-Corrective smoothed particle hydrodynamics (SPH) implementation in Rust
 
-Reimplementation of my [previous C++ PCISPH](https://github.com/cerrno/pcisph) repository now including a parallel solver
+Reimplementation of my [previous C++ PCISPH](https://github.com/cerrno/pcisph) repository now including a parallel solver using [Rayon](https://github.com/rayon-rs/rayon)
 
 For further information, see SPH tutorials on [my website](https://lucasschuermann.com/writing), including an introduction to [SPH math](https://lucasschuermann.com/writing/particle-based-fluid-simulation) and a [simple SPH solver](https://lucasschuermann.com/writing/implementing-sph-in-2d).
 
