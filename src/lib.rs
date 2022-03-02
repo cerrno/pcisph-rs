@@ -1,16 +1,8 @@
-#![warn(
-    unreachable_pub,
-    trivial_casts,
-    trivial_numeric_casts,
-    unused_extern_crates,
-    rust_2018_idioms,
-    missing_debug_implementations
-)]
+use std::f32::consts::PI;
 
 use glam::{vec2, vec3, UVec2, Vec2, Vec3};
-use log::{info, warn};
+use log::info;
 use rayon::prelude::*;
-use std::f32::consts::PI;
 
 pub const G: Vec2 = glam::const_vec2!([0.0, -9.81]);
 pub const WINDOW_WIDTH: u32 = 1280;
@@ -32,7 +24,7 @@ const DT: f32 = (1.0 / 40.0) / SOLVER_STEPS as f32;
 const DT2: f32 = DT * DT;
 const KERN: f32 = 20.0 / (2.0 * PI * H * H);
 const KERN_NORM: f32 = 30.0 / (2.0 * PI * H * H);
-const EPS: f32 = 0.0000001;
+const EPS: f32 = 0.000_000_1;
 const EPS2: f32 = EPS * EPS;
 
 const CELL_SIZE: f32 = H; // set to smoothing radius
@@ -55,15 +47,16 @@ pub struct Particle {
 }
 
 impl Particle {
+    #[must_use]
     pub fn new(x: f32, y: f32) -> Self {
         Self {
             x: Vec2::new(x, y),
             m: 1.0,
-            ..Default::default()
+            ..Particle::default()
         }
     }
 
-    #[inline(always)]
+    #[must_use]
     pub fn position(&self) -> Vec2 {
         self.x
     }
@@ -90,6 +83,7 @@ impl Neighbor {
 }
 
 impl State {
+    #[must_use]
     pub fn new() -> Self {
         let boundaries = [
             vec3(1.0, 0.0, 0.0),           // left
@@ -101,7 +95,7 @@ impl State {
         Self {
             boundaries,
             grid,
-            ..Default::default()
+            ..State::default()
         }
     }
 
@@ -144,7 +138,7 @@ impl State {
 
     fn integrate_insert(&mut self) {
         let grid = &mut self.grid;
-        grid.iter_mut().for_each(|g| g.clear());
+        grid.iter_mut().for_each(std::vec::Vec::clear);
         self.particles.iter_mut().enumerate().for_each(|(i, p)| {
             p.v += G * DT;
             p.xlast = p.x;
@@ -196,7 +190,7 @@ impl State {
                 pi.dv = dens_proj;
                 pi.p = STIFFNESS * (dens - pi.m * REST_DENS);
                 pi.pv = STIFF_APPROX * dens_proj;
-            })
+            });
     }
 
     fn project_correct(&mut self) {
@@ -245,7 +239,7 @@ impl State {
                         pi.v += (PARTICLE_RADIUS - d) * Vec2::new(b.x, b.y) / DT;
                     }
                 }
-            })
+            });
     }
 
     pub fn update(&mut self) {

@@ -1,11 +1,15 @@
 [package]
 name = "pcisph_rs"
-version = "0.1.0"
+version = "0.2.0"
+repository = "https://github.com/cerrno/pcisph-rs"
 authors = ["Lucas V. Schuermann <lucas@lvs.io>"]
 edition = "2021"
+license = "MIT"
+readme = "README.md"
+publish = false
 
 [dependencies]
-glium = "0.30.1"
+glium = "0.31.0"
 glam = "0.20.0"
 cgmath = "0.18.0"
 rand = "0.8.4"
@@ -25,4 +29,5 @@ harness = false
 lto = "fat"
 panic = "abort"
 codegen-units = 1
-# debug = true # uncomment for flamegraphs
+debug = 0         # uncomment for flamegraphs
+strip = true
