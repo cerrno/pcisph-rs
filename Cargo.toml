@@ -9,14 +9,14 @@ readme = "README.md"
 publish = false
 
 [dependencies]
-glium = "0.31.0"
-glam = "0.20.0"
-cgmath = "0.18.0"
-rand = "0.8.4"
-rayon = "1.5.1"
+glium = "0.31"
+glam = "0.20"
+cgmath = "0.18"
+rand = "0.8"
+rayon = "1.5"
 log = "0.4"
 # usually this would be present in a binary-specific section
-env_logger = "0.9.0"
+env_logger = "0.9"
 
 [dev-dependencies]
 criterion = "0.3"
